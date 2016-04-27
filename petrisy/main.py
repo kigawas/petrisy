@@ -9,7 +9,7 @@ def calculate_level_fallfreq(score):
     # Based on the score, return the level the player is on and
     # how many seconds pass until a falling piece falls one space.
     level = int(score / 10) + 1
-    fallFreq = 0.27 - (level * 0.02)
+    fallFreq = 0.8 - (level * 0.02)
     return level, fallFreq
 
 
@@ -44,15 +44,18 @@ def run():
                 if (event.key == pglocals.K_p):
                     # Pausing the game
                     DISPLAYSURF.fill(BGCOLOR)
-                    showTextScreen('Paused')  # pause until a key press
+                    show_text('Paused')  # pause until a key press
                     lastFallTime = time.time()
                     lastMoveDownTime = time.time()
                     lastMoveSidewaysTime = time.time()
-                elif (event.key == pglocals.K_LEFT or event.key == pglocals.K_a):
+                elif (event.key == pglocals.K_LEFT or
+                      event.key == pglocals.K_a):
                     movingLeft = False
-                elif (event.key == pglocals.K_RIGHT or event.key == pglocals.K_d):
+                elif (event.key == pglocals.K_RIGHT or
+                      event.key == pglocals.K_d):
                     movingRight = False
-                elif (event.key == pglocals.K_DOWN or event.key == pglocals.K_s):
+                elif (event.key == pglocals.K_DOWN or
+                      event.key == pglocals.K_s):
                     movingDown = False
 
             elif event.type == pglocals.KEYDOWN:
@@ -92,7 +95,8 @@ def run():
                             1) % len(PIECES[fallingPiece['shape']])
 
                 # making the piece fall faster with the down key
-                elif (event.key == pglocals.K_DOWN or event.key == pglocals.K_s):
+                elif (event.key == pglocals.K_DOWN or
+                      event.key == pglocals.K_s):
                     movingDown = True
                     if is_valid_position(board, fallingPiece, adjY=1):
                         fallingPiece['y'] += 1
@@ -144,7 +148,7 @@ def run():
         draw_board(board)
         draw_status(score, level)
         draw_next_piece(nextPiece)
-        if fallingPiece != None:
+        if fallingPiece is not None:
             draw_piece(fallingPiece)
 
         pygame.display.update()
@@ -152,7 +156,6 @@ def run():
 
 
 def main():
-
     show_text('Petrisy')
     while True:  # game loop
         run()
