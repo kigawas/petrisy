@@ -8,7 +8,7 @@ import pygame.locals as pglocals
 def calculate_level_fallfreq(score):
     # Based on the score, return the level the player is on and
     # how many seconds pass until a falling piece falls one space.
-    level = int(score / 10) + 1
+    level = score // 10 + 1
     fallFreq = 0.8 - (level * 0.02)
     return level, fallFreq
 
@@ -29,7 +29,7 @@ def run():
     nextPiece = get_new_piece()
 
     while True:  # game loop
-        if fallingPiece == None:
+        if fallingPiece is None:
             # No falling piece in play, so start a new piece at the top
             fallingPiece = nextPiece
             nextPiece = get_new_piece()
@@ -134,7 +134,8 @@ def run():
             if not is_valid_position(board, fallingPiece, adjY=1):
                 # falling piece has landed, set it on the board
                 add_piece(board, fallingPiece)
-                score += remove_complete_lines(board)
+                removed_lines = remove_complete_lines(board)
+                score += removed_lines if removed_lines <= 1 else removed_lines + level * 2 - 2
                 level, fallFreq = calculate_level_fallfreq(score)
                 fallingPiece = None
             else:
@@ -161,5 +162,6 @@ def main():
         run()
         show_text('Game Over')
 
-#show_text('AA')
-main()
+
+if __name__ == '__main__':
+    main()
