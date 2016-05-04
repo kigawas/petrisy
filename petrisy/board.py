@@ -1,5 +1,6 @@
 import random
-from config import *
+from config import BOARDWIDTH, BOARDHEIGHT, BLANK
+from config import PIECES, COLORS, TEMPLATEWIDTH, TEMPLATEHEIGHT
 
 
 def get_blank_board():
@@ -58,7 +59,8 @@ def is_complete_line(board, y):
 
 
 def remove_complete_lines(board):
-    # Remove any completed lines on the board, move everything above them down, and return the number of complete lines.
+    # Remove any completed lines on the board,
+    # move everything above them down, and return the number of complete lines.
     numLinesRemoved = 0
     y = BOARDHEIGHT - 1  # start y at the bottom of the board
     while y >= 0:

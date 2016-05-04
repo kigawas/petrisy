@@ -1,8 +1,16 @@
 import time
 
-from ui import *
-from board import *
 import pygame.locals as pglocals
+import pygame
+
+from ui import (show_text, draw_board, draw_piece, draw_status,
+                draw_next_piece)
+from board import (get_new_piece, get_blank_board, add_piece,
+                   is_valid_position, remove_complete_lines)
+from setup import FPSCLOCK, DISPLAYSURF
+from config import (FPS, BGCOLOR, PIECES, BOARDHEIGHT, MOVEDOWNFREQ,
+                    MOVESIDEWAYSFREQ)
+from control import check_quit
 
 
 def calculate_level_fallfreq(score):
@@ -135,7 +143,8 @@ def run():
                 # falling piece has landed, set it on the board
                 add_piece(board, fallingPiece)
                 removed_lines = remove_complete_lines(board)
-                score += removed_lines if removed_lines <= 1 else removed_lines + level * 2 - 2
+                score += removed_lines if removed_lines <= 1 \
+                    else removed_lines + level * 2 - 2
                 level, fallFreq = calculate_level_fallfreq(score)
                 fallingPiece = None
             else:

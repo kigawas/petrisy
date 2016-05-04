@@ -1,8 +1,12 @@
-import time
+import pygame
 
-from setup import *
-from config import *
-from control import check_key_press, check_quit
+from setup import FPSCLOCK, DISPLAYSURF, BASICFONT, BIGFONT
+from config import (BORDERCOLOR, BGCOLOR, TEXTCOLOR, TEXTSHADOWCOLOR, COLORS,
+                    LIGHTCOLORS)
+from config import WINDOWWIDTH, WINDOWHEIGHT, BOXSIZE, BOARDWIDTH, BOARDHEIGHT
+from config import (XMARGIN, TOPMARGIN, TEMPLATEWIDTH, TEMPLATEHEIGHT, BLANK,
+                    PIECES)
+from control import check_key_press
 
 
 def show_text(text):
@@ -49,7 +53,7 @@ def draw_box(boxx, boxy, color, pixelx=None, pixely=None):
     # pixelx & pixely (this is used for the "Next" piece).
     if color == BLANK:
         return
-    if pixelx == None and pixely == None:
+    if pixelx is None and pixely is None:
         pixelx, pixely = to_pixel_coords(boxx, boxy)
     pygame.draw.rect(DISPLAYSURF, COLORS[color],
                      (pixelx + 1, pixely + 1, BOXSIZE - 1, BOXSIZE - 1))
@@ -89,8 +93,9 @@ def draw_status(score, level):
 
 def draw_piece(piece, pixelx=None, pixely=None):
     shapeToDraw = PIECES[piece['shape']][piece['rotation']]
-    if pixelx == None and pixely == None:
-        # if pixelx & pixely hasn't been specified, use the location stored in the piece data structure
+    if pixelx is None and pixely is None:
+        # if pixelx & pixely hasn't been specified
+        # use the location stored in the piece data structure
         pixelx, pixely = to_pixel_coords(piece['x'], piece['y'])
 
     # draw each of the boxes that make up the piece

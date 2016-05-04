@@ -9,7 +9,7 @@ COLORS = [JapaneseColor.REDS.ENJI, JapaneseColor.BLUES.RURI,
           JapaneseColor.GREENS.WAKATAKE, JapaneseColor.YELLOWS.KANZOU]
 LIGHTCOLORS = [Color.change_color(c, 20) for c in COLORS]
 
-#Keyboard config
+# Keyboard config
 MOVESIDEWAYSFREQ = 0.15
 MOVEDOWNFREQ = 0.1
 
