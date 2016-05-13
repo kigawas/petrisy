@@ -1,6 +1,6 @@
 import random
-from config import BOARDWIDTH, BOARDHEIGHT, BLANK
-from config import PIECES, COLORS, TEMPLATEWIDTH, TEMPLATEHEIGHT
+from config import (BOARDWIDTH, BOARDHEIGHT, BLANK, PIECES, COLORS,
+                    TEMPLATEWIDTH, TEMPLATEHEIGHT)
 
 
 def get_blank_board():
